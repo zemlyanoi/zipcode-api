@@ -10,6 +10,7 @@ public interface ZipCodeMerger {
    * Method is merging zip codes and remove redundant ranges
    * @param zipCodes
    * @return merged zip codes
+   * @throws IllegalArgumentException
    */
   Set<ZipCode> mergeZipCodes(List<ZipCode> zipCodes);
 

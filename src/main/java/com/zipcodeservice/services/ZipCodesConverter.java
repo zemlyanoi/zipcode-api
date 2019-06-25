@@ -6,8 +6,10 @@ import java.util.List;
 public interface ZipCodesConverter {
 
   /**
-   * Convert zip code ranges Strigng to list. Input param structure : [94133,94133]
-   * [94200,94299] [94226,94399] or method will throw IllegalArgumentException
+   * Convert zip code ranges String to list.
+   * @param  zipcodeRanges: [94133,94133] [94200,94299] [94226,94399]
+   * @return sorted List<ZipCode>
+   * @throws IllegalArgumentException
    */
   List<ZipCode> convert(String zipcodeRanges);
 }
