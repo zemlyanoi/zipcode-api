@@ -1,0 +1,10 @@
+version: '2.3'
+services:
+  api:
+    image: sonomatest/code-challenge-api:latest
+    ports:
+      - '8080:8080'
+  ui:
+    image: sonomatest/code-challenge-ui:latest
+    ports:
+      - '3000:3000'

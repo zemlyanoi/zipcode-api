@@ -1,0 +1,28 @@
+# temp files
+out/
+build/
+bin/
+
+# dot files
+.classpath
+.project
+.settings/
+*.sw*
+
+# gradle
+/gradle/
+.gradle/
+
+# log files
+*.log
+
+# IDE
+/.idea/
+*.iml
+
+node_modules
+build
+
+# OS
+.DS_Store
+

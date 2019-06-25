@@ -1,0 +1,42 @@
+task stopContainer(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", "docker stop hello || true"
+    }
+}
+
+task deleteContainer(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", 'docker rm hello || true'
+    }
+}
+
+task deleteImage(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", 'docker rmi sonomatest/code-challenge-api || true'
+    }
+}
+
+task createImage(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", 'docker build -t sonomatest/code-challenge-api .'
+    }
+}
+
+task runContainer(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", 'docker run -d -p 8080:8080 --name hello sonomatest/code-challenge-api'
+    }
+}
+
+task publishImage(type: Exec, group: 'docker') {
+    doFirst { executable "sh"
+        args "-c", 'docker push sonomatest/code-challenge-api'
+    }
+}
+
+publishImage { dependsOn createImage }
+runContainer { dependsOn createImage }
+createImage { dependsOn deleteImage }
+deleteImage { dependsOn deleteContainer }
+deleteContainer { dependsOn stopContainer }
+stopContainer { dependsOn bootJar }
