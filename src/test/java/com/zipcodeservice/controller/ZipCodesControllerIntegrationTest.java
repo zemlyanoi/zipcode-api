@@ -21,6 +21,8 @@ public class ZipCodesControllerIntegrationTest {
 
   public static final String WRONG_PARAM =
       "fixtures/wrong_param_spaces_before.json";
+  public static final String WRONG_BOUND_PARAM =
+      "fixtures/wrong_bound_param.json";
   public static final String FOUR_PARAMS_WITH_ONE_OUTPUT =
       "fixtures/four_params_with_duplicates_with_one_output.json";
   public static final String THREE_PARAMS_WITH_THREE_OUTPUT =
@@ -177,6 +179,14 @@ public class ZipCodesControllerIntegrationTest {
     ResponseEntity response = getResponseEntity("[94133,9413221] [94200,94299]");
     assertEquals(400, response.getStatusCode().value());
     String expectedDto = fixture(WRONG_PARAM);
+    assertEquals(expectedDto, response.getBody());
+  }
+
+  @Test
+  public void test_1_lover_bound_higher_upper() {
+    ResponseEntity response = getResponseEntity("[94133,94122]");
+    assertEquals(400, response.getStatusCode().value());
+    String expectedDto = fixture(WRONG_BOUND_PARAM);
     assertEquals(expectedDto, response.getBody());
   }
 

@@ -8,11 +8,14 @@ public class ZipCode implements Comparable<ZipCode> {
   public ZipCode(int loverBound, int upperBound) {
     this.loverBound = loverBound;
     this.upperBound = upperBound;
+
+    if (this.loverBound > this.upperBound) {
+      throw new IllegalArgumentException("Lover bound should be lover or equals upperBound");
+    }
   }
 
   public ZipCode(String loverBound, String upperBound) {
-    this.loverBound = Integer.parseInt(loverBound);
-    this.upperBound = Integer.parseInt(upperBound);
+    this(Integer.parseInt(loverBound), Integer.parseInt(upperBound));
   }
 
   public int getLoverBound() {
@@ -21,6 +24,10 @@ public class ZipCode implements Comparable<ZipCode> {
 
   public void setLoverBound(int loverBound) {
     this.loverBound = loverBound;
+
+    if (this.loverBound > this.upperBound) {
+      throw new IllegalArgumentException("Lover bound should be lover or equals upperBound");
+    }
   }
 
   public int getUpperBound() {
@@ -29,6 +36,10 @@ public class ZipCode implements Comparable<ZipCode> {
 
   public void setUpperBound(int upperBound) {
     this.upperBound = upperBound;
+
+    if (this.loverBound > this.upperBound) {
+      throw new IllegalArgumentException("Lover bound should be lover or equals upperBound");
+    }
   }
 
   @Override

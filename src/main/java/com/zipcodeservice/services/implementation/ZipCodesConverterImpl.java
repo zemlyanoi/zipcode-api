@@ -16,8 +16,6 @@ public class ZipCodesConverterImpl implements ZipCodesConverter {
 
   Logger logger = LoggerFactory.getLogger(ZipCodesConverter.class);
 
-  private static final int ZIP_CODE_LENGTH = 5;
-
   @Override
   public List<ZipCode> convert(String zipcodeRanges) {
     List<ZipCode> zipCodes = new LinkedList<>();
@@ -38,29 +36,13 @@ public class ZipCodesConverterImpl implements ZipCodesConverter {
   private String[] splitRange(String range) {
     String rangeWithoutBrackets = clearBrackets(range);
     String[] parsedRange = parseRange(rangeWithoutBrackets);
-    if (parsedRange.length != 2) {
-      logger.error("zip code range should contain 2 params - lover and upper bound, param = {}",
-          range);
-      throw new IllegalArgumentException(
-          "zip code range should contain 2 params - lover and upper bound "
-      );
-    }
-
-    if (StringUtils.isEmpty(parsedRange[0]) || StringUtils.isEmpty(parsedRange[1])
-        || parsedRange[0].length() != ZIP_CODE_LENGTH
-        || parsedRange[1].length() != ZIP_CODE_LENGTH) {
-      logger.error("zip code should have " + ZIP_CODE_LENGTH + " digits length param = {} ", range);
-      throw new IllegalArgumentException(
-          "zip code should have " + ZIP_CODE_LENGTH + " digits length"
-      );
-    }
     return parsedRange;
   }
 
   private String clearBrackets(String range) {
     if (!range.contains("[") || !range.contains("]")) {
       throw new IllegalArgumentException(
-          "zip code should have format [00000,00000]"
+          "zip code should have format [xxxxx,xxxxx]"
       );
     }
     return range.replaceAll("\\[|\\]", "");
@@ -69,8 +51,9 @@ public class ZipCodesConverterImpl implements ZipCodesConverter {
   private String[] parseRange(String range) {
     String regexp = "(\\d{5}),(\\d{5})";
     if (!range.matches(regexp)) {
+      logger.error("bad format {}", range);
       throw new IllegalArgumentException(
-          "zip code should have format [00000,00000]"
+          "zip code should have format [xxxxx,xxxxx]"
       );
     }
 
