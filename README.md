@@ -1,4 +1,4 @@
-# ZIPCOEDE SERVICE
+# ZIPCODE SERVICE
 
 Coding Challenge
 
