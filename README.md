@@ -26,9 +26,9 @@ Given a collection of 5-digit ZIP code ranges (each range includes both their up
 - clone the repository
 - make command `./gradlew clean build` in zipcodeservice folder
 - navigate to folder `cd build/libs` where jar file has been built
-- run command `java -jar zipcodeservice-0.0.1-SNAPSHOT.jar` for start application
+- run command `java -jar zipcodeservice.jar` for start application
 - application will run using port 8080
-- use any HTTP client to make a POST request on REST service `localhost:8080/process-zipcodes` and send Request Body text like `[94133,94133] [94200,94299] [94226 94399]` 
+- use any HTTP client to make a POST request on REST service `http://localhost:8080/process-zipcodes` and send Request Body text like `[94133,94133] [94200,94299] [94226 94399]` 
 
 ## HOW TO RUN WITH UI
 
